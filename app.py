@@ -32,6 +32,12 @@ class Product(db.Model):
         self.price = price
         self.qty = qty
 
+# product schema
+class ProductSchema(ma.Schema):
+    # display these data to the client
+    class Meta:
+        fields = ("id", "name", "description", "price", "qty")
+
 # start the server
 if __name__ == "__main__":
     app.run(debug=True)
