@@ -22,7 +22,7 @@ class Product(db.Model):
     name = db.Column(db.String(100), unique = True)
     description = db.Column(db.String(200))
     price = db.Column(db.Float)
-    qty = db.Column(db.Ineger)
+    qty = db.Column(db.Integer)
 
     # constructor
     # self is same as this
@@ -37,6 +37,11 @@ class ProductSchema(ma.Schema):
     # display these data to the client
     class Meta:
         fields = ("id", "name", "description", "price", "qty")
+
+# init schema
+product_schema = ProductSchema()
+# one to many relationship
+products_schema = ProductSchema(many = True)
 
 # start the server
 if __name__ == "__main__":
