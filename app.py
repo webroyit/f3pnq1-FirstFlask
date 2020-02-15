@@ -43,6 +43,23 @@ product_schema = ProductSchema()
 # one to many relationship
 products_schema = ProductSchema(many = True)
 
+#create a product route
+@app.route("/product", methods=["POST"])
+def add_product():
+    # get the data from the client
+    name = request.json["name"]
+    description = request.json["description"]
+    price = request.json["price"]
+    qty = request.json["qty"]
+
+    new_product = Product(name, description, price, qty)
+
+    # save the new product to the database
+    db.session.add(new_product)
+    db.session.commit()
+
+    return product_schema.jsonify(new_product)
+
 # start the server
 if __name__ == "__main__":
     app.run(debug=True)
