@@ -100,6 +100,18 @@ def update_product(id):
 
     return product_schema.jsonify(product)
 
+# delete a product
+@app.route("/product/<id>", methods=["DELETE"])
+def delete_product(id):
+    # find this product from the database
+    product = Product.query.get(id)
+    # remove the product
+    db.session.delete(product)
+    # save the change to the database
+    db.session.commit()
+    
+    return product_schema.jsonify(product)
+
 # start the server
 if __name__ == "__main__":
     app.run(debug=True)
