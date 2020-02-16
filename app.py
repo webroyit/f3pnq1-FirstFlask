@@ -65,9 +65,17 @@ def add_product():
 def get_products():
     # get all the products from the database
     all_products = Product.query.all()
+    # for array or object
     result = products_schema.dump(all_products)
 
     return jsonify(result)
+
+# get single product
+@app.route("/product/<id>", methods=["GET"])
+def get_product(id):
+    # find this product from the database
+    product = Product.query.get(id)
+    return product_schema.jsonify(product)
 
 # start the server
 if __name__ == "__main__":
